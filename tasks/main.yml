@@ -1,0 +1,3 @@
+---
+# tasks file for openstack-security-hardening
+- include: keystone.yml

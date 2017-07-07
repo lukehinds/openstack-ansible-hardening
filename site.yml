@@ -1,0 +1,5 @@
+h--
+- hosts: all
+sudo: yes
+roles:
+    - { role: "openstack-security-hardening", openstack-security-hardening_version: "0.0.1" }
