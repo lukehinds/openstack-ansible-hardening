@@ -62,37 +62,119 @@
     owner: keystone
     group: keystone
     mode: 0640
-  tags: master
+  tags: master test
 
 - name: Check insecure_debug is false
   lineinfile:
-    state: present
     dest: /etc/keystone/keystone.conf
     regexp: '^(#)?insecure_debug'
     line: 'insecure_debug = false'
-  tags: master
-
-- name: Check notification_format is cadf
-  lineinfile:
-    dest: /etc/keystone/keystone.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
-    line: 'notification_format = cadf'
-    insertafter: EOF
-  tags: master
+  tags:
+   - master
+   - test
 
 - name: Is max_request_body_size set to default (114688)?
   lineinfile:
     dest: /etc/keystone/keystone.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
+    regexp: "^(#)?notification_format"
     line: 'notification_format = cadf'
     insertafter: EOF
   tags: master
 
-- name: Disable admin token in /etc/keystone/keystone.conf
+- name: Is crypt_strength set to max (100000)
   lineinfile:
     dest: /etc/keystone/keystone.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
-    line: 'notification_format = cadf'
+    regexp: "^(#)?crypt_strength"
+    line: 'crypt_strength = 100000'
     insertafter: EOF
-  tags: master
+  tags:
+   - master
 
+- name: Is strict_password_check set to true?
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: "^(#)?strict_password_check"
+    line: 'strict_password_check = true'
+    insertafter: EOF
+  tags:
+   - master
+
+- name: Is secure_proxy_ssl_header set to HTTP_X_FORWARDED_PROTO?
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: "^(#)?secure_proxy_ssl_header"
+    line: 'secure_proxy_ssl_header = HTTP_X_FORWARDED_PROTO'
+    insertafter: EOF
+  tags:
+   - newton
+   - mitaka
+
+- name: Is debug set to false?
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: "^(#)?debug"
+    line: 'debug = false'
+    insertafter: EOF
+  tags:
+   - master
+   - ocata
+   - newton
+   - mitaka
+
+- name: Is use_syslog set to false?
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: "^(#)?use_syslog"
+    line: 'use_syslog = true'
+    insertafter: EOF
+  tags:
+   - master
+   - ocata
+   - newton
+   - mitaka
+
+- name: Is rate_limit_interval set to TODO?
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: "^(#)?rate_limit_interval"
+    line: 'rate_limit_interval = TODO'
+    insertafter: EOF
+  tags:
+   - master
+
+- name: Is rate_limit_burst set to TODO?
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: "^(#)?rate_limit_burst"
+    line: 'rate_limit_burst = TODO'
+    insertafter: EOF
+  tags:
+   - master
+
+- name: Is rate_limit_except_level set to TODO?
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: "^(#)?rate_limit_except_level"
+    line: 'rate_limit_except_level = TODO'
+    insertafter: EOF
+  tags:
+   - master
+
+- name: Is rate_limit_except_level set to TODO?
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: "^(#)?rate_limit_except_level"
+    line: 'rate_limit_except_level = TODO'
+    insertafter: EOF
+  tags:
+   - master
+
+- name: Insure allowed_origin is set to None
+  # Note: https://docs.openstack.org/admin-guide/cross-project-cors.html#security-concerns
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: "^(#)?allowed_origin"
+    line: 'allowed_origin = <None>'
+    insertafter: EOF
+  tags:
+   - master
