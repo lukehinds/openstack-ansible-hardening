@@ -78,4 +78,21 @@
     regexp: '^notification_format.=.basic|^#ThisValueHere'
     line: 'notification_format = cadf'
     insertafter: EOF
-  tags: master kilo
+  tags: master
+
+- name: Is max_request_body_size set to default (114688)?
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: '^notification_format.=.basic|^#ThisValueHere'
+    line: 'notification_format = cadf'
+    insertafter: EOF
+  tags: master
+
+- name: Disable admin token in /etc/keystone/keystone.conf
+  lineinfile:
+    dest: /etc/keystone/keystone.conf
+    regexp: '^notification_format.=.basic|^#ThisValueHere'
+    line: 'notification_format = cadf'
+    insertafter: EOF
+  tags: master
+

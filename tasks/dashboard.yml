@@ -1,0 +1,81 @@
+---
+# tasks file for openstack-ansible-hardening
+- name: Check local_settings.py ownership and perms
+  file:
+    path:  /etc/openstack-dashboard/local_settings.py
+    owner: root
+    group: horizon
+    mode: 0640
+  tags: master
+
+- name: Is DISALLOW_IFRAME_EMBED parameter set to True?
+  lineinfile:
+    dest:  /etc/openstack-dashboard/local_settings.py
+    regexp: '^DISALLOW_IFRAME_EMBED'
+    line: 'DISALLOW_IFRAME_EMBED'
+    insertafter: EOF
+  tags: master
+
+- name: Is CSRF_COOKIE_SECURE parameter set to True?
+  lineinfile:
+    dest:  /etc/openstack-dashboard/local_settings.py
+    regexp: '^CSRF_COOKIE_SECURE'
+    line: 'CSRF_COOKIE_SECURE'
+    insertafter: EOF
+  tags: master
+
+- name: Is SESSION_COOKIE_SECURE parameter set to True?
+  lineinfile:
+    dest:  /etc/openstack-dashboard/local_settings.py
+    regexp: '^SESSION_COOKIE_SECURE'
+    line: 'SESSION_COOKIE_SECURE'
+    insertafter: EOF
+  tags: master
+
+- name: Is SESSION_COOKIE_HTTPONLY parameter set to True?
+  lineinfile:
+    dest:  /etc/openstack-dashboard/local_settings.py
+    regexp: '^SESSION_COOKIE_HTTPONLY'
+    line: 'SESSION_COOKIE_HTTPONLY'
+    insertafter: EOF
+  tags: master
+
+- name: Is PASSWORD_AUTOCOMPLETE parameter set to False?
+  lineinfile:
+    dest:  /etc/openstack-dashboard/local_settings.py
+    regexp: '^PASSWORD_AUTOCOMPLETE'
+    line: 'PASSWORD_AUTOCOMPLETE'
+    insertafter: EOF
+  tags: master
+
+- name: Is DISABLE_PASSWORD_REVEAL parameter set to False?
+  lineinfile:
+    dest:  /etc/openstack-dashboard/local_settings.py
+    regexp: '^DISABLE_PASSWORD_REVEAL'
+    line: 'DISABLE_PASSWORD_REVEAL'
+    insertafter: EOF
+  tags: master
+
+- name: Is ENFORCE_PASSWORD_CHECK parameter set to True?
+  lineinfile:
+    dest:  /etc/openstack-dashboard/local_settings.py
+    regexp: '^ENFORCE_PASSWORD_CHECK'
+    line: 'ENFORCE_PASSWORD_CHECK'
+    insertafter: EOF
+  tags: master
+
+- name: Is PASSWORD_VALIDATOR parameter configured?
+  lineinfile:
+    dest:  /etc/openstack-dashboard/local_settings.py
+    regexp: '^PASSWORD_VALIDATOR'
+    line: 'PASSWORD_VALIDATOR'
+    insertafter: EOF
+  tags: master
+
+- name: Is SECURE_PROXY_SSL_HEADER parameter configured?
+  lineinfile:
+    dest:  /etc/openstack-dashboard/local_settings.py
+    regexp: '^SECURE_PROXY_SSL_HEADER'
+    line: 'SECURE_PROXY_SSL_HEADER'
+    insertafter: EOF
+  tags: master
