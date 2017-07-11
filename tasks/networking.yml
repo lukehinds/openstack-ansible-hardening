@@ -1,60 +1,57 @@
 ---
 # tasks file for openstack-ansible-hardening
-- name: Check nova.conf ownership and perms
+- name: Check neutron.conf  ownership and perms
   file:
-    path:  /etc/nova/nova.conf
+    path:  /etc/neutron/neutron.conf
     owner: root
-    group: nova
+    group: neutron
     mode: 0640
-  tags: master
+  tags:
+   - master
 
 - name: Check api-paste.ini ownership and perms
   file:
-    path:  /etc/nova/api-paste-ini
+    path:  /etc/nova/api-paste.ini
     owner: root
-    group: nova
+    group: neutron
     mode: 0640
-  tags: master
+  tags:
+   - master
 
 - name: Check policy.json ownership and perms
   file:
-    path:  /etc/nova/policy.json
+    path:  /etc/neutron/policy.json
     owner: root
-    group: nova
+    group: neutron
     mode: 0640
-  tags: master
+  tags:
+   - master
 
 - name: Check rootwrap.conf ownership and perms
   file:
-    path:  /etc/nova/rootwrap.conf
+    path:  /etc/neutron/rootwrap.conf
     owner: root
-    group: nova
+    group: neutron
     mode: 0640
-  tags: master
+  tags:
+   - master
 
 - name: Is keystone used for authentication?
   lineinfile:
-    path:  /etc/nova/nova.conf
-    owner: root
-    group: nova
-    mode: 0640
-  tags: master
+    dest:  /etc/neutron/neutron.conf
+    regexp: '^(#)auth_strategy'
+    line: 'auth_strategy=keystone'
+    insertafter: EOF
+  tags:
+   - master
 
-- name: Is keystone used for authentication?
+- name: TODO Is secure protocol used for authentication? (auth_uri & insecure)
   lineinfile:
     dest:  /etc/nova/nova.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
-    line: 'notification_format = cadf'
+    regexp: ''
+    line: ''
     insertafter: EOF
-  tags: master
-
-- name: Is secure protocol used for authentication?
-  lineinfile:
-    dest:  /etc/nova/nova.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
-    line: 'notification_format = cadf'
-    insertafter: EOF
-  tags: master
+  tags: todo
 
 - name: Does Nova communicate with Glance securely?
   lineinfile:
@@ -62,4 +59,5 @@
     regexp: '^notification_format.=.basic|^#ThisValueHere'
     line: 'notification_format = cadf'
     insertafter: EOF
-  tags: master
+  tags:
+   - master

@@ -1,65 +1,80 @@
 ---
 # tasks file for openstack-ansible-hardening
-- name: Check nova.conf ownership and perms
+- name: Check cinder.conf  ownership and perms
   file:
-    path:  /etc/nova/nova.conf
+    path:  /etc/cinder/cinder.conf
     owner: root
-    group: nova
+    group: cinder
     mode: 0640
-  tags: master
+  tags:
+   - master
 
 - name: Check api-paste.ini ownership and perms
   file:
-    path:  /etc/nova/api-paste-ini
+    path:  /etc/cinder/api-paste-ini
     owner: root
-    group: nova
+    group: cinder
     mode: 0640
-  tags: master
+  tags:
+   - master
 
 - name: Check policy.json ownership and perms
   file:
-    path:  /etc/nova/policy.json
+    path:  /etc/cinder/policy.json
     owner: root
-    group: nova
+    group: cinder
     mode: 0640
-  tags: master
+  tags:
+   - master
 
 - name: Check rootwrap.conf ownership and perms
   file:
-    path:  /etc/nova/rootwrap.conf
+    path:  /etc/cinder/rootwrap.conf
     owner: root
-    group: nova
+    group: cinder
     mode: 0640
-  tags: master
+  tags:
+   - master
 
 - name: Is keystone used for authentication?
   lineinfile:
-    path:  /etc/nova/nova.conf
-    owner: root
-    group: nova
-    mode: 0640
-  tags: master
-
-- name: Is keystone used for authentication?
-  lineinfile:
-    dest:  /etc/nova/nova.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
-    line: 'notification_format = cadf'
+    dest:  /etc/cinder/cinder.conf
+    regexp: '^(#)auth_strategy'
+    line: 'auth_strategy=keystone'
     insertafter: EOF
   tags: master
 
-- name: Is secure protocol used for authentication?
+- name: TODO Is secure protocol used for authentication? (auth_uri & insecure)
   lineinfile:
-    dest:  /etc/nova/nova.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
-    line: 'notification_format = cadf'
+    dest:  /etc/cinder/cinder.conf
+    regexp: ''
+    line: ''
     insertafter: EOF
-  tags: master
+  tags: todo
 
-- name: Does Nova communicate with Glance securely?
+- name: Does cinder communicate with glance over TLS?
   lineinfile:
-    dest:  /etc/nova/nova.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
-    line: 'notification_format = cadf'
+    dest:  /etc/cinder/cinder.conf
+    regexp: '^(#)glance_api_insecure'
+    line: 'glance_api_insecure = False'
     insertafter: EOF
-  tags: master
+  tags:
+   - master
+
+- name: Is NAS operating in a secure environment (nas_secure_file_permissions)?
+  lineinfile:
+    dest:  /etc/cinder/cinder.conf
+    regexp: '^(#)nas_secure_file_permissions'
+    line: 'nas_secure_file_permissions = auto'
+    insertafter: EOF
+  tags:
+   - master
+
+   - name: Is NAS operating in a secure environment (nas_secure_file_operations)?
+     lineinfile:
+       dest:  /etc/cinder/cinder.conf
+       regexp: '^(#)nas_secure_file_permissions'
+       line: 'nas_secure_file_operations = auto'
+       insertafter: EOF
+     tags:
+      - master

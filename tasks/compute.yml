@@ -40,13 +40,13 @@
     insertafter: EOF
   tags: master
 
-- name: Is secure protocol used for authentication? (auth_uri & insecure)
+- name: TODO Is secure protocol used for authentication? (auth_uri & insecure)
   lineinfile:
     dest:  /etc/nova/nova.conf
-    regexp: 'TODO'
-    line: 'TODO'
+    regexp: ''
+    line: ''
     insertafter: EOF
-  tags: master
+  tags: todo
 
 - name: Does Nova communicate with Glance securely?
   lineinfile:

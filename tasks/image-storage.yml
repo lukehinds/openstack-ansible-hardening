@@ -6,60 +6,104 @@
     owner: root
     group: glance
     mode: 0640
-  tags: master
+  tags:
+   - master
 
-- name: Check api-paste.ini ownership and perms
+- name: Check glance-api.conf ownership and perms
   file:
-    path:  /etc/nova/api-paste-ini
+    path:  /etc/glance/glance-api.conf
     owner: root
-    group: nova
+    group: glance
     mode: 0640
-  tags: master
+  tags:
+   - master
+
+- name: Check glance-manage.conf ownership and perms
+  file:
+    path:  /etc/glance/glance-manage.conf
+    owner: root
+    group: glance
+    mode: 0640
+  tags:
+   - master
+
+- name: Check glance-registry-paste.ini ownership and perms
+  file:
+    path:  /etc/glance/glance-registry-paste.ini
+    owner: root
+    group: glance
+    mode: 0640
+  tags:
+   - master
+
+- name: Check glance-registry.conf ownership and perms
+  lineinfile:
+    path:  /etc/glance/glance-registry.conf
+    owner: root
+    group: glance
+    mode: 0640
+  tags:
+   - master
+
+- name: Check glance-scrubber.conf ownership and perms
+  lineinfile:
+    path:  /etc/glance/glance-scrubber.conf
+    owner: root
+    group: glance
+    mode: 0640
+  tags:
+   - master
+
+- name: Check glance-swift-store.conf ownership and perms
+  lineinfile:
+    path:  /etc/glance/glance-swift-store.conf
+    owner: root
+    group: glance
+    mode: 0640
+  tags:
+   - master
 
 - name: Check policy.json ownership and perms
-  file:
-    path:  /etc/nova/policy.json
+  lineinfile:
+    path:  /etc/glance/policy.json
     owner: root
-    group: nova
+    group: glance
     mode: 0640
-  tags: master
+  tags:
+   - master
 
-- name: Check rootwrap.conf ownership and perms
-  file:
-    path:  /etc/nova/rootwrap.conf
-    owner: root
-    group: nova
-    mode: 0640
-  tags: master
+  - name: Check schema-image.json ownership and perms
+    lineinfile:
+      path:  /etc/glance/schema-image.json
+      owner: root
+      group: glance
+      mode: 0640
+  tags:
+   - master
+
+  - name: Check schema.json ownership and perms
+    lineinfile:
+      path:  /etc/glance/schema.json
+      owner: root
+      group: glance
+      mode: 0640
+  tags:
+   - master
 
 - name: Is keystone used for authentication?
   lineinfile:
-    path:  /etc/nova/nova.conf
-    owner: root
-    group: nova
-    mode: 0640
-  tags: master
-
-- name: Is keystone used for authentication?
-  lineinfile:
-    dest:  /etc/nova/nova.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
-    line: 'notification_format = cadf'
+    dest:  /etc/glance/glance-api.conf
+    regexp: '^(#)auth_strategy'
+    line: 'auth_strategy=keystone'
     insertafter: EOF
-  tags: master
+  tags:
+   - master
 
-- name: Is secure protocol used for authentication?
+- name: TODO TLS enabled for authentication?
   lineinfile:
-    dest:  /etc/nova/nova.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
-    line: 'notification_format = cadf'
+    dest:  /etc/glance/glance-api.conf
+    regexp: '^(#)auth_uri'
+    line: 'auth_uri'
     insertafter: EOF
-  tags: master
-
-- name: Does Nova communicate with Glance securely?
-  lineinfile:
-    dest:  /etc/nova/nova.conf
-    regexp: '^notification_format.=.basic|^#ThisValueHere'
-    line: 'notification_format = cadf'
-    insertafter: EOF
-  tags: master
+  tags:
+     - todo

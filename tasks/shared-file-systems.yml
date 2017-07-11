@@ -1,0 +1,91 @@
+---
+# tasks file for openstack-ansible-hardening
+- name: Check manila.conf  ownership and perms
+  file:
+    path:  /etc/manila/manila.conf
+    owner: root
+    group: manila
+    mode: 0640
+  tags:
+   - master
+
+- name: Check api-paste.ini ownership and perms
+  file:
+    path:  /etc/manila/api-paste-ini
+    owner: root
+    group: manila
+    mode: 0640
+  tags:
+   - master
+
+- name: Check policy.json ownership and perms
+  file:
+    path:  /etc/manila/policy.json
+    owner: root
+    group: manila
+    mode: 0640
+    tags:
+     - master
+
+- name: Check rootwrap.conf ownership and perms
+  file:
+    path:  /etc/manila/rootwrap.conf
+    owner: root
+    group: manila
+    mode: 0640
+  tags:
+   - master
+
+- name: Is keystone used for authentication?
+  lineinfile:
+    dest:  /etc/manila/manila.conf
+    regexp: '^(#)auth_strategy'
+    line: 'auth_strategy=keystone'
+    insertafter: EOF
+  tags:
+   - master
+
+- name: TODO Is TLS enabled for authentication?
+  lineinfile:
+    dest:  /etc/manila/manila.conf
+    regexp: ''
+    line: ''
+    insertafter: EOF
+  tags:
+   - todo
+
+- name: TODO Does Shared File Systems contact with Compute over TLS?
+  lineinfile:
+    dest:  /etc/manila/manila.conf
+    regexp: ''
+    line: ''
+    insertafter: EOF
+  tags:
+   - todo
+
+  - name: TODO Does Shared File Systems contact with Networking over TLS?
+    lineinfile:
+       dest:  /etc/manila/manila.conf
+       regexp: ''
+       line: ''
+       insertafter: EOF
+     tags:
+      - todo
+
+- name: TODO Does Shared File Systems contact with Block Storage over TLS?
+   lineinfile:
+     dest:  /etc/manila/manila.conf
+     regexp: ''
+     line: ''
+     insertafter: EOF
+   tags:
+    - todo
+
+- name: Is max size for the request body set to default (114688)?
+  lineinfile:
+    dest:  /etc/manila/manila.conf
+    regexp: '^(#)max_request_body_size'
+    line: 'max_request_body_size=114688'
+    insertafter: EOF
+  tags:
+   - master
