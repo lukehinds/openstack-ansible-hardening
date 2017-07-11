@@ -11,39 +11,39 @@
 - name: Is DISALLOW_IFRAME_EMBED parameter set to True?
   lineinfile:
     dest:  /etc/openstack-dashboard/local_settings.py
-    regexp: '^DISALLOW_IFRAME_EMBED'
-    line: 'DISALLOW_IFRAME_EMBED'
+    regexp: '^(#)DISALLOW_IFRAME_EMBED'
+    line: 'DISALLOW_IFRAME_EMBED = True'
     insertafter: EOF
   tags: master
 
 - name: Is CSRF_COOKIE_SECURE parameter set to True?
   lineinfile:
     dest:  /etc/openstack-dashboard/local_settings.py
-    regexp: '^CSRF_COOKIE_SECURE'
-    line: 'CSRF_COOKIE_SECURE'
+    regexp: '^(#)CSRF_COOKIE_SECURE'
+    line: 'CSRF_COOKIE_SECURE = True'
     insertafter: EOF
   tags: master
 
 - name: Is SESSION_COOKIE_SECURE parameter set to True?
   lineinfile:
     dest:  /etc/openstack-dashboard/local_settings.py
-    regexp: '^SESSION_COOKIE_SECURE'
-    line: 'SESSION_COOKIE_SECURE'
+    regexp: '^(#)SESSION_COOKIE_SECURE'
+    line: 'SESSION_COOKIE_SECURE = True'
     insertafter: EOF
   tags: master
 
 - name: Is SESSION_COOKIE_HTTPONLY parameter set to True?
   lineinfile:
     dest:  /etc/openstack-dashboard/local_settings.py
-    regexp: '^SESSION_COOKIE_HTTPONLY'
-    line: 'SESSION_COOKIE_HTTPONLY'
+    regexp: '^(#)SESSION_COOKIE_HTTPONLY'
+    line: 'SESSION_COOKIE_HTTPONLY = True'
     insertafter: EOF
   tags: master
 
 - name: Is PASSWORD_AUTOCOMPLETE parameter set to False?
   lineinfile:
     dest:  /etc/openstack-dashboard/local_settings.py
-    regexp: '^PASSWORD_AUTOCOMPLETE'
+    regexp: '^(#)PASSWORD_AUTOCOMPLETE = False'
     line: 'PASSWORD_AUTOCOMPLETE'
     insertafter: EOF
   tags: master
@@ -51,31 +51,31 @@
 - name: Is DISABLE_PASSWORD_REVEAL parameter set to False?
   lineinfile:
     dest:  /etc/openstack-dashboard/local_settings.py
-    regexp: '^DISABLE_PASSWORD_REVEAL'
-    line: 'DISABLE_PASSWORD_REVEAL'
+    regexp: '^(#)DISABLE_PASSWORD_REVEAL'
+    line: 'DISABLE_PASSWORD_REVEAL = False'
     insertafter: EOF
   tags: master
 
 - name: Is ENFORCE_PASSWORD_CHECK parameter set to True?
   lineinfile:
     dest:  /etc/openstack-dashboard/local_settings.py
-    regexp: '^ENFORCE_PASSWORD_CHECK'
-    line: 'ENFORCE_PASSWORD_CHECK'
+    regexp: '^(#)ENFORCE_PASSWORD_CHECK'
+    line: 'ENFORCE_PASSWORD_CHECK = True'
     insertafter: EOF
   tags: master
 
-- name: Is PASSWORD_VALIDATOR parameter configured?
+- name: TODO Is PASSWORD_VALIDATOR parameter configured? 
   lineinfile:
     dest:  /etc/openstack-dashboard/local_settings.py
-    regexp: '^PASSWORD_VALIDATOR'
+    regexp: 'TODO'
     line: 'PASSWORD_VALIDATOR'
     insertafter: EOF
   tags: master
 
-- name: Is SECURE_PROXY_SSL_HEADER parameter configured?
+- name: TODO Is SECURE_PROXY_SSL_HEADER parameter configured?
   lineinfile:
     dest:  /etc/openstack-dashboard/local_settings.py
-    regexp: '^SECURE_PROXY_SSL_HEADER'
+    regexp: 'TODO'
     line: 'SECURE_PROXY_SSL_HEADER'
     insertafter: EOF
   tags: master
