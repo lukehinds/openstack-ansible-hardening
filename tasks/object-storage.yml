@@ -1,2 +1,65 @@
 ---
 # tasks file for openstack-ansible-hardening
+
+- name: Check swift.conf ownership and perms
+  file:
+    path:  /etc/swift/swift.conf
+    owner: root
+    group: swift
+    mode: 0640
+  tags:
+   - master
+
+- name: Check account-server.conf ownership and perms
+  file:
+    path:  /etc/swift/account-server.conf
+    owner: root
+    group: swift
+    mode: 0640
+  tags:
+   - master
+
+- name: Check container-reconciler.conf ownership and perms
+  file:
+    path:  /etc/swift/container-reconciler.conf
+    owner: root
+    group: swift
+    mode: 0640
+  tags:
+   - master
+
+  - name: Check container-server.conf ownership and perms
+    file:
+      path:  /etc/swift/container-server.conf
+      owner: root
+      group: swift
+      mode: 0640
+    tags:
+     - master
+
+  - name: Check object-expirer.conf ownership and perms
+    file:
+      path:  /etc/swift/object-expirer.conf
+      owner: root
+      group: swift
+      mode: 0640
+    tags:
+     - master
+
+  - name: Check object-server.conf ownership and perms
+    file:
+      path:  /etc/swift/object-server.conf
+      owner: root
+      group: swift
+      mode: 0640
+    tags:
+     - master
+
+  - name: Check proxy-server.conf ownership and perms
+    file:
+      path:  /etc/swift/proxy-server.conf
+      owner: root
+      group: swift
+      mode: 0640
+    tags:
+     - master
