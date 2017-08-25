@@ -6,6 +6,8 @@
     owner: keystone
     group: keystone
     mode: 0640
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -15,6 +17,8 @@
     owner: keystone
     group: keystone
     mode: 0640
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -24,6 +28,8 @@
     owner: keystone
     group: keystone
     mode: 0640
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -33,6 +39,8 @@
     owner: keystone
     group: keystone
     mode: 0640
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -42,6 +50,8 @@
     owner: keystone
     group: keystone
     mode: 0640
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -51,6 +61,8 @@
     owner: keystone
     group: keystone
     mode: 0640
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -60,6 +72,8 @@
     owner: keystone
     group: keystone
     mode: 0640
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -69,6 +83,8 @@
     owner: keystone
     group: keystone
     mode: 0640
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -77,6 +93,8 @@
     dest: /etc/keystone/keystone.conf
     regexp: '^(#)?insecure_debug'
     line: 'insecure_debug = false'
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -86,6 +104,8 @@
     regexp: "^(#)?notification_format"
     line: 'notification_format = cadf'
     insertafter: EOF
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -95,6 +115,8 @@
     regexp: "^(#)?crypt_strength"
     line: 'crypt_strength = 100000'
     insertafter: EOF
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -104,6 +126,8 @@
     regexp: "^(#)?strict_password_check"
     line: 'strict_password_check = true'
     insertafter: EOF
+  notify:
+   - restart apache
   tags:
    - master
 
@@ -113,6 +137,8 @@
     regexp: "^(#)?secure_proxy_ssl_header"
     line: 'secure_proxy_ssl_header = HTTP_X_FORWARDED_PROTO'
     insertafter: EOF
+  notify:
+   - restart apache
   tags:
    - newton
    - mitaka
@@ -123,6 +149,8 @@
     regexp: "^(#)?debug"
     line: 'debug = false'
     insertafter: EOF
+  notify:
+   - restart apache
   tags:
    - master
    - ocata
@@ -135,6 +163,8 @@
     regexp: "^(#)?use_syslog"
     line: 'use_syslog = true'
     insertafter: EOF
+  notify:
+   - restart apache
   tags:
    - master
    - ocata
@@ -147,6 +177,8 @@
     regexp: "^(#)?rate_limit_interval"
     line: 'rate_limit_interval = TODO'
     insertafter: EOF
+  notify:
+   - restart apache
   tags:
    - todo
 
@@ -156,6 +188,8 @@
     regexp: "^(#)?rate_limit_burst"
     line: 'rate_limit_burst = <tbd>'
     insertafter: EOF
+  notify:
+   - restart apache
   tags:
    - todo
 
@@ -165,6 +199,8 @@
     regexp: "^(#)?rate_limit_except_level"
     line: 'rate_limit_except_level = <tbd>'
     insertafter: EOF
+  notify:
+   - restart apache
   tags:
    - todo
 
@@ -175,5 +211,7 @@
     regexp: "^(#)?allowed_origin"
     line: 'allowed_origin = <None>'
     insertafter: EOF
+  notify:
+   - restart apache
   tags:
    - master
